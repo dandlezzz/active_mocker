@@ -95,6 +95,10 @@ class MicropostMock < ::ActiveHash::Base
     associations['user'] = val
   end
 
+  def self.association_classes
+    @association_classes ||= HashWithIndifferentAccess.new
+  end
+
   ##################################
   #  Model Methods getter/setters  #
   ##################################

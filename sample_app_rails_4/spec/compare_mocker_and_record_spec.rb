@@ -405,6 +405,66 @@ describe 'Comparing ActiveMocker Api to ActiveRecord Api' do
 
     end
 
+    describe '#create' do
+
+      def create_upon_association(user_class)
+        user = user_class.create
+        mircopost = user.microposts.create
+        expect(mircopost.persisted?).to eq true
+        expect(user.microposts.first).to eq mircopost
+      end
+
+      it 'User' do
+        create_upon_association(User)
+      end
+
+      it 'UserMock' do
+        UserMock.association_classes['microposts'] = MicropostMock
+        create_upon_association(UserMock)
+      end
+
+    end
+
+    describe '#create!' do
+
+      def create_bang_upon_association(user_class)
+        user = user_class.create
+        mircopost = user.microposts.create!
+        expect(mircopost.persisted?).to eq true
+        expect(user.microposts.first).to eq mircopost
+      end
+
+      it 'User' do
+        create_bang_upon_association(User)
+      end
+
+      it 'UserMock' do
+        UserMock.association_classes['microposts'] = MicropostMock
+        create_bang_upon_association(UserMock)
+      end
+
+    end
+
+    describe '#build' do
+
+      def build_upon_association(user_class)
+        user = user_class.create
+        mircopost = user.microposts.build
+        expect(mircopost.persisted?).to eq false
+        expect(user.microposts.first).to eq mircopost
+      end
+
+      it 'User' do
+        build_upon_association(User)
+      end
+
+      it 'UserMock' do
+        UserMock.association_classes['microposts'] = MicropostMock
+        build_upon_association(UserMock)
+      end
+
+    end
+
     describe '#find' do
 
       context 'single id passed' do

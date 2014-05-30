@@ -115,43 +115,47 @@ class UserMock < ::ActiveHash::Base
   end
 
   def microposts
-    associations['microposts'] ||= ActiveMocker::Collection::Association.new
+    associations['microposts'] ||= ActiveMocker::Collection::Association.new([], self.class.association_classes['microposts'])
   end
 
   def microposts=(val)
-    associations['microposts'] = ActiveMocker::Collection::Association.new(val)
+    associations['microposts'] = ActiveMocker::Collection::Association.new(val, self.class.association_classes['microposts'])
   end
 
   def relationships
-    associations['relationships'] ||= ActiveMocker::Collection::Association.new
+    associations['relationships'] ||= ActiveMocker::Collection::Association.new([], self.class.association_classes['relationships'])
   end
 
   def relationships=(val)
-    associations['relationships'] = ActiveMocker::Collection::Association.new(val)
+    associations['relationships'] = ActiveMocker::Collection::Association.new(val, self.class.association_classes['relationships'])
   end
 
   def followed_users
-    associations['followed_users'] ||= ActiveMocker::Collection::Association.new
+    associations['followed_users'] ||= ActiveMocker::Collection::Association.new([], self.class.association_classes['followed_users'])
   end
 
   def followed_users=(val)
-    associations['followed_users'] = ActiveMocker::Collection::Association.new(val)
+    associations['followed_users'] = ActiveMocker::Collection::Association.new(val, self.class.association_classes['followed_users'])
   end
 
   def reverse_relationships
-    associations['reverse_relationships'] ||= ActiveMocker::Collection::Association.new
+    associations['reverse_relationships'] ||= ActiveMocker::Collection::Association.new([], self.class.association_classes['reverse_relationships'])
   end
 
   def reverse_relationships=(val)
-    associations['reverse_relationships'] = ActiveMocker::Collection::Association.new(val)
+    associations['reverse_relationships'] = ActiveMocker::Collection::Association.new(val, self.class.association_classes['reverse_relationships'])
   end
 
   def followers
-    associations['followers'] ||= ActiveMocker::Collection::Association.new
+    associations['followers'] ||= ActiveMocker::Collection::Association.new([], self.class.association_classes['followers'])
   end
 
   def followers=(val)
-    associations['followers'] = ActiveMocker::Collection::Association.new(val)
+    associations['followers'] = ActiveMocker::Collection::Association.new(val, self.class.association_classes['followers'])
+  end
+
+  def self.association_classes
+    @association_classes ||= HashWithIndifferentAccess.new
   end
 
   ##################################

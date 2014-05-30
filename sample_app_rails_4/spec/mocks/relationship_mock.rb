@@ -94,6 +94,10 @@ class RelationshipMock < ::ActiveHash::Base
     associations['followed'] = val
   end
 
+  def self.association_classes
+    @association_classes ||= HashWithIndifferentAccess.new
+  end
+
   ##################################
   #  Model Methods getter/setters  #
   ##################################
